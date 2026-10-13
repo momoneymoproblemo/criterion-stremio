@@ -1,0 +1,82 @@
+{
+  "updated": "2026-10-13T06:38:35.562532+00:00",
+  "source": "https://www.criterion.com/shop/browse/list?sort=spine_number",
+  "sourceRows": 1891,
+  "catalogueEntries": 1721,
+  "movies": 1707,
+  "series": 14,
+  "boxSets": 155,
+  "excluded": [
+    {
+      "title": "W. C. Fields—Six Short Films",
+      "url": "https://www.criterion.com/films/618-w-c-fields-six-short-films",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Beastie Boys Video Anthology",
+      "url": "https://www.criterion.com/films/638-beastie-boys-video-anthology",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Jimi Plays Monterey & Shake! Otis at Monterey",
+      "url": "https://www.criterion.com/films/722-jimi-plays-monterey-shake-otis-at-monterey",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "By Brakhage: An Anthology, Volume One",
+      "url": "https://www.criterion.com/films/731-by-brakhage-an-anthology-volume-one",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Martha Graham: Dance on Film",
+      "url": "https://www.criterion.com/films/835-martha-graham-dance-on-film",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Science Is Fiction: 23 Films by Jean Painlevé",
+      "url": "https://www.criterion.com/films/1286-science-is-fiction-23-films-by-jean-painleve",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "The Golden Age of Television",
+      "url": "https://www.criterion.com/films/3560-the-golden-age-of-television",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "By Brakhage: An Anthology, Volume Two",
+      "url": "https://www.criterion.com/films/23953-by-brakhage-an-anthology-volume-two",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "A Hollis Frampton Odyssey",
+      "url": "https://www.criterion.com/films/27945-a-hollis-frampton-odyssey",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Les Blank: Always for Pleasure",
+      "url": "https://www.criterion.com/films/28658-les-blank-always-for-pleasure",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "The Kennedy Films of Robert Drew & Associates",
+      "url": "https://www.criterion.com/films/28907-the-kennedy-films-of-robert-drew-associates",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "100 Years of Olympic Films: 1912–2012",
+      "url": "https://www.criterion.com/films/29360-100-years-of-olympic-films-1912-2012",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Scorsese Shorts",
+      "url": "https://www.criterion.com/films/30616-scorsese-shorts",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    },
+    {
+      "title": "Three Documentaries",
+      "url": "https://www.criterion.com/films/1079-three-documentaries",
+      "reason": "Multi-film anthology product; not a single playable IMDb film. Individual listed films are catalogued separately."
+    }
+  ],
+  "needsReview": []
+}
