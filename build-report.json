@@ -1,6 +1,8 @@
 {
-  "updated": "2026-10-13T06:38:35.562532+00:00",
+  "updated": "2026-10-13T09:26:26.320736+00:00",
   "source": "https://www.criterion.com/shop/browse/list?sort=spine_number",
+  "sourceStatus": "retained",
+  "refreshWarning": "Criterion refresh unavailable: HTTPError: HTTP Error 403: Forbidden",
   "sourceRows": 1891,
   "catalogueEntries": 1721,
   "movies": 1707,
