@@ -67,13 +67,32 @@ def new_matches(rows):
 
 def main():
     source = ROOT / 'source.json'
-    rows = json.loads(source.read_text()) if os.getenv('OFFLINE_BUILD') == '1' else parse_source(fetch(LIST).decode())
-    if not os.getenv('OFFLINE_BUILD'): source.write_text(json.dumps(rows, ensure_ascii=False, indent=2)+'\n')
+    # A blocked upstream request must not prevent the bundled catalogue publishing.
+    rows = json.loads(source.read_text(encoding='utf-8'))
+    source_status = 'bundled' if os.getenv('OFFLINE_BUILD') == '1' else 'refreshed'
+    refresh_warning = None
+    if os.getenv('OFFLINE_BUILD') != '1':
+        try:
+            refreshed = parse_source(fetch(LIST).decode())
+            rows = refreshed
+            source.write_text(json.dumps(rows, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+        except Exception as error:
+            source_status = 'retained'
+            refresh_warning = f'Criterion refresh unavailable: {type(error).__name__}: {error}'
+            print('::warning::' + refresh_warning + '. Publishing the last saved catalogue; a future run will retry.')
+    if len(rows) < 1000:
+        raise ValueError('Saved source is incomplete; refusing to publish an empty catalogue.')
     mappings = json.loads((ROOT / 'matches.json').read_text())
     mapping_by_url = {m['url']:m for m in mappings}
     exclusions = json.loads((ROOT / 'exclusions.json').read_text())
     missing = [r for r in rows if '/films/' in r['url'] and r['url'] not in mapping_by_url and r['url'] not in exclusions]
-    extra, pending = new_matches(missing)
+    try:
+        extra, pending = new_matches(missing)
+    except Exception as error:
+        extra, pending = [], missing
+        message = f'New-title matching unavailable: {type(error).__name__}: {error}'
+        refresh_warning = (refresh_warning + '; ' if refresh_warning else '') + message
+        print('::warning::' + message + '. Existing checked title mappings are retained.')
     mappings.extend(extra)
     if extra: (ROOT / 'matches.json').write_text(json.dumps(mappings, ensure_ascii=False, indent=2)+'\n')
     mapping_by_url.update({m['url']:m for m in extra})
@@ -120,7 +139,7 @@ def main():
     showcase=['tt0047478','tt0118694','tt0019254','tt0056801','tt0113247','tt0050083']
     by_id={m['id']:m for m in metas};covers=[{'name':by_id[i]['name'],'poster':by_id[i]['poster']} for i in showcase if i in by_id]
     write('summary.json',dict(updated=datetime.datetime.now(datetime.timezone.utc).isoformat(),movies=sum(m['type']=='movie' for m in metas),series=sum(m['type']=='series' for m in metas),covers=covers))
-    report=dict(updated=datetime.datetime.now(datetime.timezone.utc).isoformat(),source=LIST,sourceRows=len(rows),catalogueEntries=len(metas),movies=sum(m['type']=='movie' for m in metas),series=sum(m['type']=='series' for m in metas),boxSets=sum('/boxsets/' in r['url'] for r in rows),excluded=[{'title':r['title'],'url':r['url'],'reason':exclusions[r['url']]} for r in rows if r['url'] in exclusions],needsReview=pending)
+    report=dict(updated=datetime.datetime.now(datetime.timezone.utc).isoformat(),source=LIST,sourceStatus=source_status,refreshWarning=refresh_warning,sourceRows=len(rows),catalogueEntries=len(metas),movies=sum(m['type']=='movie' for m in metas),series=sum(m['type']=='series' for m in metas),boxSets=sum('/boxsets/' in r['url'] for r in rows),excluded=[{'title':r['title'],'url':r['url'],'reason':exclusions[r['url']]} for r in rows if r['url'] in exclusions],needsReview=pending)
     (ROOT/'build-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     (OUT/'.nojekyll').touch()
     count=sum(1 for p in ROOT.rglob('*') if p.is_file() and '.cache' not in p.parts and '.git' not in p.parts)
